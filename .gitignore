@@ -33,6 +33,7 @@ bld/
 # Build results
 *.dll
 *.exe
+*.out
 *.o
 *.obj
 *.pch
