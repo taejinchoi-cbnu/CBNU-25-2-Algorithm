@@ -10,7 +10,7 @@
 
 int main()
 {
-    int res = 5526;
+    int res = 5526; // res 최대값으로 init
     // the number of temperatures to analyse
     int n;
     scanf("%d", &n);
@@ -21,9 +21,10 @@ int main()
         // a temperature expressed as an integer ranging from -273 to 5526
         int t;
         scanf("%d", &t);
-        // t가 res보다 0에 가까우면 바꿔줌
+        // 절대값 t가 같은 경우 양수로 바꿔줌
         if (abs(res) == abs(t) && t > 0)
             res = t;
+        // t가 res보다 0에 가까우면 바꿔줌
         if (abs(res) > abs(t))
             res = t;
     }

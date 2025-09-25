@@ -94,6 +94,7 @@ int main()
     // 새 책을 넣어야할 공간 계산
     while (1)
     {
+        // 선반에 없는 책 개수 체크
         int needed_slots = 0;
         for (int i = 0; i < new_count; i++)
         {
@@ -102,21 +103,22 @@ int main()
             {
                 if (strcmp(new_books[i], shelf_books[j].name) == 0)
                 {
-                    found = 1;
+                    found = 1; // 이미 선반에 있으면 break
                     break;
                 }
             }
             if (!found)
-                needed_slots++;
+                needed_slots++; // 새로 선반에 넣어야하면 필요 공간값++
         }
         // 선반에서 책 제거 안해도 자리 있는 경우
         if (shelf_size + needed_slots <= n)
             break;
 
         // 책을 제거하고 선반에 넣어하는 경우를 위한 가장 낮은 rank 계산
-        int min_rank = INT_MAX;
+        int min_rank = 10; // min_rank는 최대값으로 init
         for (int i = 0; i < shelf_size; i++)
         {
+            // tbr이거나, 가장 높은 rank의 책은 제거 대상x
             if (shelf_books[i].rank != -1 && shelf_books[i].rank != max_rank)
             {
                 if (shelf_books[i].rank < min_rank)
@@ -124,21 +126,21 @@ int main()
             }
         }
         // 선반에 책을 못넣는 경우
-        if (min_rank == INT_MAX)
+        if (min_rank == 10)
         {
             printf("Your TBR is out of control Clara!\n");
             return 0;
         }
 
         // 작은 rank인 책들 삭제
-        int w = 0;
+        int idx = 0;
         for (int i = 0; i < shelf_size; i++)
         {
             if (shelf_books[i].rank == min_rank)
                 continue;
-            shelf_books[w++] = shelf_books[i];
+            shelf_books[idx++] = shelf_books[i];
         }
-        shelf_size = w;
+        shelf_size = idx;
     }
 
     // 새 책들 추가하기
@@ -170,3 +172,8 @@ int main()
 
     return 0;
 }
+
+/*
+조건들이 많은데 스토리로 풀어서 찾기 힘들엇음.
+하나 체크하면 또 다른거 체크해야하는거 빼먹고의 연속
+ */
