@@ -35,21 +35,7 @@ int main()
         if (L > 0 && title[L - 1] == '\n')
             title[L - 1] = '\0';
 
-        // 새 책 입력값에서 중복 있으면 skip
-        int dup = 0;
-        for (int j = 0; j < new_count; j++)
-        {
-            if (strcmp(new_books[j], title) == 0)
-            {
-                dup = 1;
-                break;
-            }
-        }
-        // 중복 아니면 추가
-        if (!dup)
-        {
-            strcpy(new_books[new_count++], title);
-        }
+        strcpy(new_books[new_count++], title);
     }
 
     // 선반에 있는 책 입력받기
@@ -73,13 +59,14 @@ int main()
         *rank_str = '\0';
         rank_str++;
         strcpy(shelf_books[i].name, name);
+
         if (strcmp(rank_str, "None") == 0)
         {
             shelf_books[i].rank = -1; // tbr인 경우 rank -1로
         }
         else
         {
-            shelf_books[i].rank = atoi(rank_str); // tbr 아닌경우 rank값 그대로
+            shelf_books[i].rank = atoi(rank_str);
         }
     }
 
@@ -155,6 +142,7 @@ int main()
                 break;
             }
         }
+
         if (!found)
         {
             strcpy(shelf_books[shelf_size].name, new_books[i]);
